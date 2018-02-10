@@ -6,8 +6,8 @@ ACCESS_KEY = os.environ['ACCESS_KEY']
 ACCESS_SECRET = os.environ['ACCESS_SECRET']
 
 SOURCE_ACCOUNT = os.environ['SOURCE_ACCOUNT']
-ODDS = os.environ['ODDS']
-ORDER = os.environ['ORDER']
+ODDS = int(os.environ['ODDS'])
+ORDER = int(os.environ['ORDER'])
 SOURCE_EXCLUDE = os.environ['SOURCE_EXCLUDE']
 
 TWEET_ACCOUNT = os.environ['TWEET_ACCOUNT']

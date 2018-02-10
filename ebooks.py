@@ -82,22 +82,20 @@ if __name__ == "__main__":
         api = connect()
         source_tweets = []
         if SOURCE_ACCOUNT:
-            twitter_tweets = []
-            for handle in SOURCE_ACCOUNT:
-                user = handle
-                handle_stats = api.GetUser(screen_name=user)
-                status_count = handle_stats.statuses_count
-                max_id = None
-                my_range = min(17, int((status_count/200) + 1))
-                for x in range(1, my_range):
-                    twitter_tweets_iter, max_id = grab_tweets(api, max_id)
-                    twitter_tweets += twitter_tweets_iter
-                print("{0} tweets found in {1}".format(len(twitter_tweets), handle))
-                if not twitter_tweets:
-                    print("Error fetching tweets from Twitter. Aborting.")
-                    sys.exit()
-                else:
-                    source_tweets += twitter_tweets
+            user = SOURCE_ACCOUNT
+            handle_stats = api.GetUser(screen_name=user)
+            status_count = handle_stats.statuses_count
+            max_id = None
+            my_range = min(17, int((status_count/200) + 1))
+            for x in range(1, my_range):
+                twitter_tweets_iter, max_id = grab_tweets(api, max_id)
+                twitter_tweets += twitter_tweets_iter
+            print("{0} tweets found in {1}".format(len(twitter_tweets), handle))
+            if not twitter_tweets:
+                print("Error fetching tweets from Twitter. Aborting.")
+                sys.exit()
+            else:
+                source_tweets += twitter_tweets
         mine = markov.MarkovChainer(order)
         for tweet in source_tweets:
             if not re.search('([\.\!\?\"\']$)', tweet):

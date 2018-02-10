@@ -82,8 +82,8 @@ if __name__ == "__main__":
         api = connect()
         source_tweets = []
         if SOURCE_ACCOUNT:
-            user = SOURCE_ACCOUNT
-            handle_stats = api.GetUser(screen_name=user)
+            handle = SOURCE_ACCOUNT
+            handle_stats = api.GetUser(screen_name=handle)
             status_count = handle_stats.statuses_count
             max_id = None
             my_range = min(17, int((status_count/200) + 1))

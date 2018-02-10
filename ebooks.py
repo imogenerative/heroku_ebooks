@@ -89,14 +89,12 @@ if __name__ == "__main__":
             my_range = min(17, int((status_count/200) + 1))
             for x in range(1, my_range):
                 twitter_tweets_iter, max_id = grab_tweets(api, max_id)
-                twitter_tweets += twitter_tweets_iter
-            print("{0} tweets found in {1}".format(len(twitter_tweets), handle))
-            if not twitter_tweets:
+                source_tweets += twitter_tweets_iter
+            print("{0} tweets found in {1}".format(len(source_tweets), handle))
+            if not source_tweets:
                 print("Error fetching tweets from Twitter. Aborting.")
                 sys.exit()
-            else:
-                source_tweets += twitter_tweets
-        mine = markov.MarkovChainer(order)
+            mine = markov.MarkovChainer(order)
         for tweet in source_tweets:
             if not re.search('([\.\!\?\"\']$)', tweet):
                 tweet += "."

@@ -81,29 +81,22 @@ if __name__ == "__main__":
     else:
         api = connect()
         source_tweets = []
-        if STATIC_TEST:
-            file = TEST_SOURCE
-            print(">>> Generating from {0}".format(file))
-            string_list = open(file).readlines()
-            for item in string_list:
-                source_tweets += item.split(",")
-        if SOURCE_ACCOUNTS and len(SOURCE_ACCOUNTS[0]) > 0:
-            twitter_tweets = []
-            for handle in SOURCE_ACCOUNTS:
-                user = handle
-                handle_stats = api.GetUser(screen_name=user)
-                status_count = handle_stats.statuses_count
-                max_id = None
-                my_range = min(17, int((status_count/200) + 1))
-                for x in range(1, my_range):
-                    twitter_tweets_iter, max_id = grab_tweets(api, max_id)
-                    twitter_tweets += twitter_tweets_iter
+        twitter_tweets = []
+        for handle in SOURCE_ACCOUNT:
+            user = handle
+            handle_stats = api.GetUser(screen_name=user)
+            status_count = handle_stats.statuses_count
+            max_id = None
+            my_range = min(17, int((status_count/200) + 1))
+            for x in range(1, my_range):
+                twitter_tweets_iter, max_id = grab_tweets(api, max_id)
+                twitter_tweets += twitter_tweets_iter
                 print("{0} tweets found in {1}".format(len(twitter_tweets), handle))
-                if not twitter_tweets:
-                    print("Error fetching tweets from Twitter. Aborting.")
-                    sys.exit()
-                else:
-                    source_tweets += twitter_tweets
+            if not twitter_tweets:
+                print("Error fetching tweets from Twitter. Aborting.")
+                sys.exit()
+            else:
+                source_tweets += twitter_tweets
         mine = markov.MarkovChainer(order)
         for tweet in source_tweets:
             if not re.search('([\.\!\?\"\']$)', tweet):

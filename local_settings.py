@@ -10,7 +10,7 @@ ODDS = os.environ['ODDS']
 ORDER = os.environ['ORDER']
 SOURCE_EXCLUDE = os.environ['SOURCE_EXCLUDE']
 
-TWEET_ACCOUNT = os.environ['lambdacalculush']
+TWEET_ACCOUNT = os.environ['TWEET_ACCOUNT']
 
 DEBUG = False
 STATIC_TEST = False

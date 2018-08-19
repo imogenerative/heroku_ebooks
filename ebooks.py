@@ -136,6 +136,13 @@ if __name__ == "__main__":
             # nOT TROLLING AURYNN AT ALL
             ebook_tweet = re.sub(r'my space', 'MySpace', ebook_tweet, flags=re.IGNORECASE)
 
+            # everything about this bot is just terrible
+            afab_tweet = "Non binary isn't just afab androgynous ppl."
+            afab_probability = random.randint(0, 99)
+
+            if not afab_probability:
+                ebooks_tweet = afab_tweet
+
             if not DEBUG:
                 status = api.PostUpdate(ebook_tweet)
                 print(status.text.encode('utf-8'))
